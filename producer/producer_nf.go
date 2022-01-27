@@ -195,6 +195,10 @@ func ConvertNetFlowDataSet(version uint16, baseTime uint32, uptime uint32, recor
 			DecodeUNumber(v, &(flowMessage.TCPFlags))
 		case netflow.NFV9_FIELD_MIN_TTL:
 			DecodeUNumber(v, &(flowMessage.IPTTL))
+		case netflow.IPFIX_FIELD_ipTTL:
+			if flowMessage.IPTTL == 0 {
+				DecodeUNumber(v, &(flowMessage.IPTTL))
+			}
 
 		// IP
 		case netflow.NFV9_FIELD_IPV4_SRC_ADDR:
